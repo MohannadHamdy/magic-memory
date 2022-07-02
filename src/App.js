@@ -1,18 +1,33 @@
-function App() {
+import "./App.css";
+import { useState } from "react";
+const cardImages = [
+  { src: "/img/helmet-1.png" },
+  { src: "/img/potion-1.png" },
+  { src: "/img/ring-1.png" },
+  { src: "/img/scroll-1.png" },
+  { src: "/img/shield-1.png" },
+  { src: "/img/sword-1.png" },
+];
+
+const App = () => {
+  const [cards, setCards] = useState([]);
+  const [turns, setTurns] = useState(0);
+
+  const shuffleImages = () => {
+    const shuffledCards = [...cardImages, ...cardImages]
+      .sort(() => Math.random() - 0.5)
+      .map((card) => ({ ...card, id: Math.random() }));
+    setCards(shuffledCards);
+    setTurns(0);
+  };
+
+  console.log(cards);
   return (
     <div className="App">
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Magic Match</h1>
+      <button onClick={shuffleImages}>New Game</button>
     </div>
   );
-}
+};
 
 export default App;
